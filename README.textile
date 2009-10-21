@@ -1,13 +1,13 @@
 h2. ABOUT:
 
-Inploy is a Rails plugin to deploy applications in a easier way. You can use Inploy from a remote machine or from the local machine, too. It's integrated with Git, Rake and intended to do most of the common work, so you don't need to.
+Inploy is a Rails plugin to deploy applications in a easier way. You can use Inploy from a remote machine or from the local machine, too. It's integrated with Git, Subversion, Rake and intended to do most of the common work, so you don't need to.
 
 Actually, Inploy has four rake tasks:
 
 * inploy:remote:setup
 
 - connects to a list of servers
-- clones a git repository
+- clones a repository
 - runs inploy:local:setup
 
 * inploy:remote:update
@@ -39,16 +39,16 @@ Actually, Inploy has four rake tasks:
 
 h2. INSTALLATION:
 
-<pre><code>script/plugin install git://github.com/dcrec1/inploy.git</code></pre>
+<pre><code>script/plugin install git://github.com/jeffleeismyhero/inploy.git</code></pre>
 
 h2. CONFIGURATION
 
 Create a config/deploy.rb file and configure it something like this:
 
 <pre><code>deploy.application = "signal"
-deploy.repository = 'git://github.com/dcrec1/signal.git'
-deploy.user = 'dcrec1'
-deploy.hosts = ['hooters', 'geni']
+deploy.repository = 'git://github.com/jeffleeismyhero/test.git'
+deploy.user = 'jeffleeismyhero'
+deploy.hosts = ['production']
 deploy.path = '/opt'</code></pre>
 
 Path and user are optional, default values are /opt and root.

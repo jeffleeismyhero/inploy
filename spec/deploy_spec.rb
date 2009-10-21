@@ -28,12 +28,12 @@ describe Inploy::Deploy do
     end
 
     context "on remote setup" do
-      it "should clone the repository with the application name and execute local setup" do
+      it "should clone or checkout the repository with the application name and execute local setup" do
         expect_setup_with @user, @path
         subject.remote_setup
       end
 
-      it "should dont execute init.sh if doesnt exists" do
+      it "should not execute init.sh if does not exist" do
         dont_accept_command "ssh #{@user}@#{@host} 'cd #{@path}/#{@application} && .init.sh'"
         subject.remote_setup
       end
@@ -56,8 +56,8 @@ describe Inploy::Deploy do
     end
 
     context "on local update" do
-      it "should pull the repository" do
-        expect_command "git pull origin master"
+      it "should pull or update the repository" do
+        expect_command rcs_update(capture_rcs(@repository))
         subject.local_update
       end
 

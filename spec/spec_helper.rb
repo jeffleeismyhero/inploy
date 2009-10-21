@@ -43,3 +43,19 @@ end
 def path_exists(path)
   FileUtils.mkdir_p path
 end
+
+def capture_rcs(string)
+  {'git://'=>'git', 'svn://'=>'subversion', 'svn+ssh://'=>'subversion', 'http://'=>'subversion'}.each do |key,value|
+    return value if string.to_s.match(key)
+  end
+end
+
+def rcs_update(rcs)
+  return "git pull origin master" if rcs == 'git'
+  return "svn update" if rcs == 'subversion'
+end
+
+def rcs_setup(rcs)
+  return "git clone --depth 1" if rcs == 'git'
+  return "svn checkout" if rcs == 'subversion'
+end

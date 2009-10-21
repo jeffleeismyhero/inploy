@@ -10,7 +10,7 @@ module Inploy
     end
 
     def remote_setup
-      remote_run "cd #{path} && git clone --depth 1 #{repository} #{application} && cd #{application} && rake inploy:local:setup"
+      remote_run "cd #{path} && #{rcs_setup(capture_rcs(repository))} #{repository} #{application} && cd #{application} && rake inploy:local:setup"
     end
 
     def local_setup
@@ -25,7 +25,7 @@ module Inploy
     end
 
     def local_update
-      run "git pull origin master"
+      run rcs_update(capture_rcs(repository))
       after_update_code
     end
     
