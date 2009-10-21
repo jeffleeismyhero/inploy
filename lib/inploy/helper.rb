@@ -65,5 +65,11 @@ module Inploy
     def install_gems
       rake "gems:install"
     end
+    
+    def capture_rcs(string)
+      {'git://'=>'git', 'svn://'=>'subversion', 'svn+ssh://'=>'subversion'}.each do |key,value|
+        value if string.to_s.match(key)
+      end
+    end
   end
 end
